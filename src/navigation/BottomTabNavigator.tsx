@@ -33,7 +33,7 @@ const BottomTabNavigator = () => {
         },
         tabBarLabelStyle: {
           fontSize: moderateScale(12),
-          fontFamily: FONTS.montserrat.Medium,
+          fontFamily: FONTS.OUTFIT,
           paddingBottom: Platform.OS === 'ios' ? 10 : 5,
         },
         tabBarIconStyle: {

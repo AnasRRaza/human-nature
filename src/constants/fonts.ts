@@ -1,22 +1,3 @@
 export const FONTS = {
-  montserrat: {
-    Thin: 'Montserrat_100Thin',
-    ThinItalic: 'Montserrat_100Thin_Italic',
-    ExtraLight: 'Montserrat_200ExtraLight',
-    ExtraLightItalic: 'Montserrat_200ExtraLight_Italic',
-    Light: 'Montserrat_300Light',
-    LightItalic: 'Montserrat_300Light_Italic',
-    Regular: 'Montserrat_400Regular',
-    RegularItalic: 'Montserrat_400Regular_Italic',
-    Medium: 'Montserrat_500Medium',
-    MediumItalic: 'Montserrat_500Medium_Italic',
-    SemiBold: 'Montserrat_600SemiBold',
-    SemiBoldItalic: 'Montserrat_600SemiBold_Italic',
-    Bold: 'Montserrat_700Bold',
-    BoldItalic: 'Montserrat_700Bold_Italic',
-    ExtraBold: 'Montserrat_800ExtraBold',
-    ExtraBoldItalic: 'Montserrat_800ExtraBold_Italic',
-    Black: 'Montserrat_900Black',
-    BlackItalic: 'Montserrat_900Black_Italic',
-  },
+  OUTFIT: 'Outfit',
 };

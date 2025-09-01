@@ -1,12 +1,14 @@
 import { createTheme } from '@rneui/themed';
 
+import { FONTS } from '@/constants/fonts';
+
 export const theme = createTheme({
   lightColors: {},
   darkColors: {},
   components: {
     Text: () => ({
       style: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: FONTS.OUTFIT,
       },
     }),
   },
