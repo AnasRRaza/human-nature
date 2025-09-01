@@ -1,0 +1,8 @@
+{
+  "cSpell.words": ["netinfo"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "editor.guides.bracketPairs": "active"
+}
