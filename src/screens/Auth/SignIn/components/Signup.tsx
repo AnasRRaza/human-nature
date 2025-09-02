@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -38,7 +38,7 @@ const Signup = () => {
   };
 
   return (
-    <View>
+    <ScrollView showsVerticalScrollIndicator={false}>
       {SIGNUP_FORM_FIELDS.map(_field => (
         <Controller
           key={_field.name}
@@ -99,7 +99,8 @@ const Signup = () => {
           <Text style={styles.privacyPolicyLink}>Terms of Service</Text>
         </Text>
       </View>
-    </View>
+      <View style={{ height: 40 }} />
+    </ScrollView>
   );
 };
 

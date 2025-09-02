@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import { Theme } from '@rneui/base';
 import { makeStyles, Text } from '@rneui/themed';
@@ -10,13 +10,11 @@ const SignIn = () => {
   const styles = useStyles();
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}>
+    <View style={styles.container}>
       <Text style={styles.title}>Welcome Back!</Text>
       <Text style={styles.description}>Sign in to your account</Text>
       <AuthTab />
-    </ScrollView>
+    </View>
   );
 };
 
@@ -28,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.colors.background,
     paddingHorizontal: theme.spacing.lg,
     paddingTop: theme.spacing.lg,
-  },
-  contentContainer: {
-    flexGrow: 1,
   },
   title: {
     fontSize: moderateScale(24),
