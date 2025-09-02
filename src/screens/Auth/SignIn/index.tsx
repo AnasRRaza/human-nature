@@ -1,31 +1,22 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import { Theme } from '@rneui/base';
 import { makeStyles, Text } from '@rneui/themed';
 
-import { Logo, Splash } from '@/assets/svgs';
-import LanguageSwitch from '@/components/LanguageSwitch';
-import ThemeModeSwitch from '@/components/ThemeModeSwitch';
+import AuthTab from './components/Tabbar';
 
 const SignIn = () => {
-  const { t } = useTranslation();
   const styles = useStyles();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Logo />
-      <Splash />
-      <View style={styles.content}>
-        <LanguageSwitch />
-        <Text style={styles.title}>{t('login.title')}</Text>
-        <View style={styles.switchContainer}>
-          <ThemeModeSwitch />
-        </View>
-      </View>
-    </SafeAreaView>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+      <Text style={styles.title}>Welcome Back!</Text>
+      <Text style={styles.description}>Sign in to your account</Text>
+      <AuthTab />
+    </ScrollView>
   );
 };
 
@@ -35,18 +26,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
+    paddingHorizontal: theme.spacing.lg,
+    paddingTop: theme.spacing.lg,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  contentContainer: {
+    flexGrow: 1,
   },
   title: {
     fontSize: moderateScale(24),
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: theme.colors.foreground,
   },
-  switchContainer: {
-    marginTop: verticalScale(20),
+  description: {
+    fontSize: moderateScale(16),
+    fontWeight: '400',
+    color: theme.colors.grey2,
+    marginTop: verticalScale(10),
   },
 }));

@@ -27,8 +27,9 @@ const AuthNavigator = () => {
 
 export default AuthNavigator;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.background,
   },
 }));

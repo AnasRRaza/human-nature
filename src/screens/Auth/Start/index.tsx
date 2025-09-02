@@ -1,13 +1,23 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { verticalScale } from 'react-native-size-matters';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { makeStyles, Text } from '@rneui/themed';
 
 import { Logo, Splash } from '@/assets/svgs';
 import Button from '@/components/Button';
+import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 
 const Start = () => {
   const styles = useStyles();
+
+  const navigation =
+    useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
+
+  const handleSignIn = () => navigation.navigate(AUTH_ROUTES.SIGNIN);
+
+  const handleContinueAnonymously = () =>
+    navigation.navigate(AUTH_ROUTES.SIGNUP);
 
   return (
     <ScrollView
@@ -21,8 +31,12 @@ const Start = () => {
         Connect with your authentic self and nurture meaningful relationships
       </Text>
       <View style={styles.buttonContainer}>
-        <Button title="Sign In" />
-        <Button type="outline" title="Continue Anonymously" />
+        <Button title="Sign In" onPress={handleSignIn} />
+        <Button
+          type="outline"
+          title="Continue Anonymously"
+          onPress={handleContinueAnonymously}
+        />
       </View>
     </ScrollView>
   );
