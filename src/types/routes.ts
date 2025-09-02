@@ -5,6 +5,8 @@ export enum AUTH_ROUTES {
   START = 'start',
   SIGNIN = 'signin',
   SIGNUP = 'signup',
+  FORGOT_PASSWORD = 'forgot_password',
+  RESET_PASSWORD = 'reset_password',
 }
 
 export enum APP_ROUTES {
@@ -29,6 +31,8 @@ export type AuthStackNavigatorParamList = {
   [AUTH_ROUTES.START]: undefined;
   [AUTH_ROUTES.SIGNIN]: undefined;
   [AUTH_ROUTES.SIGNUP]: undefined;
+  [AUTH_ROUTES.FORGOT_PASSWORD]: undefined;
+  [AUTH_ROUTES.RESET_PASSWORD]: undefined;
 };
 
 export type AppStackNavigatorParamList = {

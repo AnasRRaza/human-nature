@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: '400',
     fontSize: moderateScale(16),
     marginBottom: verticalScale(8),
-    color: theme.colors.grey2,
+    color: theme.colors.grey3,
     marginHorizontal: moderateScale(-8),
   },
   rightIconContainer: {

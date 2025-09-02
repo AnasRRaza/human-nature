@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Theme } from '@rneui/base';
 import { makeStyles, Text } from '@rneui/themed';
 import * as Yup from 'yup';
@@ -12,6 +13,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { SIGNIN_FORM_FIELDS } from '@/constants/auth';
 import { COLORS } from '@/constants/colors';
+import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 import { loginValidationSchema } from '@/utils/validationSchema';
 
 type TLoginForm = Yup.InferType<typeof loginValidationSchema>;
@@ -32,10 +34,16 @@ const Login = () => {
     },
   });
 
+  const navigation =
+    useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
+
   const onSubmit: SubmitHandler<TLoginForm> = data => {
     console.log(data);
     // TODO: Login API call
   };
+
+  const handleForgotPassword = () =>
+    navigation.navigate(AUTH_ROUTES.FORGOT_PASSWORD);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -62,7 +70,9 @@ const Login = () => {
         />
       ))}
       <View style={styles.forgotPasswordContainer}>
-        <Text style={styles.forgotPassword}>Forgot Password?</Text>
+        <Text style={styles.forgotPassword} onPress={handleForgotPassword}>
+          Forgot Password?
+        </Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Sign In" onPress={handleSubmit(onSubmit)} />

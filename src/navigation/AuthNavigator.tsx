@@ -3,6 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
 import { makeStyles } from '@rneui/themed';
 
+import ForgotPassword from '@/screens/Auth/ForgotPassword';
+import ResetPassword from '@/screens/Auth/ResetPassword';
 import SignIn from '@/screens/Auth/SignIn';
 import Start from '@/screens/Auth/Start';
 import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
@@ -19,7 +21,14 @@ const AuthNavigator = () => {
         initialRouteName={AUTH_ROUTES.START}>
         <Stack.Screen name={AUTH_ROUTES.START} component={Start} />
         <Stack.Screen name={AUTH_ROUTES.SIGNIN} component={SignIn} />
-        <Stack.Screen name={AUTH_ROUTES.SIGNUP} component={SignIn} />
+        <Stack.Screen
+          name={AUTH_ROUTES.FORGOT_PASSWORD}
+          component={ForgotPassword}
+        />
+        <Stack.Screen
+          name={AUTH_ROUTES.RESET_PASSWORD}
+          component={ResetPassword}
+        />
       </Stack.Navigator>
     </SafeAreaView>
   );

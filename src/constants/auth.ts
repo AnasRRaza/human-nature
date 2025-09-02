@@ -36,3 +36,20 @@ export const SIGNUP_FORM_FIELDS = [
     leftIcon: 'lock-closed-outline',
   },
 ];
+
+export const RESET_PASSWORD_FORM_FIELDS = [
+  {
+    name: 'password',
+    label: 'New Password',
+    placeholder: 'Enter your new password',
+    secureTextEntry: true,
+    leftIcon: 'lock-closed-outline',
+  },
+  {
+    name: 'confirm_password',
+    label: 'Confirm Password',
+    placeholder: 'Enter your confirm password',
+    secureTextEntry: true,
+    leftIcon: 'lock-closed-outline',
+  },
+];
