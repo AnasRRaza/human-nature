@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export enum AUTH_ROUTES {
+  START = 'start',
   SIGNIN = 'signin',
   SIGNUP = 'signup',
 }
@@ -25,6 +26,7 @@ export enum STACKS {
 }
 
 export type AuthStackNavigatorParamList = {
+  [AUTH_ROUTES.START]: undefined;
   [AUTH_ROUTES.SIGNIN]: undefined;
   [AUTH_ROUTES.SIGNUP]: undefined;
 };

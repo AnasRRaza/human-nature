@@ -6,6 +6,7 @@ import { moderateScale, verticalScale } from 'react-native-size-matters';
 import { Theme } from '@rneui/base';
 import { makeStyles, Text } from '@rneui/themed';
 
+import { Logo, Splash } from '@/assets/svgs';
 import LanguageSwitch from '@/components/LanguageSwitch';
 import ThemeModeSwitch from '@/components/ThemeModeSwitch';
 
@@ -15,6 +16,8 @@ const SignIn = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Logo />
+      <Splash />
       <View style={styles.content}>
         <LanguageSwitch />
         <Text style={styles.title}>{t('login.title')}</Text>
