@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ScrollView, View } from 'react-native';
+import {
+  Alert,
+  PermissionsAndroid,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { launchImageLibrary, MediaType } from 'react-native-image-picker';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Theme } from '@rneui/base';
-import { makeStyles, Text } from '@rneui/themed';
+import { Image, makeStyles, Text } from '@rneui/themed';
 import * as Yup from 'yup';
 
 import Button from '@/components/Button';
@@ -20,6 +28,7 @@ import { profileValidationSchema } from '@/utils/validationSchema';
 type TProfileForm = Yup.InferType<typeof profileValidationSchema>;
 
 const Profile = () => {
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const {
     control,
     handleSubmit,
@@ -43,10 +52,53 @@ const Profile = () => {
     // TODO: Profile API call
   };
 
+  const requestGalleryPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES ||
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          title: 'Gallery Permission',
+          message: 'App needs access to your gallery',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+
+    return true;
+  };
+
+  const handleImagePicker = async () => {
+    const granted = await requestGalleryPermission();
+    if (!granted) {
+      Alert.alert(
+        'Permission denied',
+        'Please grant permission to access your gallery',
+      );
+    }
+
+    const result = await launchImageLibrary({
+      mediaType: 'photo' as MediaType,
+      quality: 0.8,
+      includeBase64: true,
+      selectionLimit: 1,
+      includeExtra: true,
+    });
+
+    if (result?.assets && result.assets.length > 0) {
+      setProfileImage(result.assets[0].uri || null);
+    }
+  };
+
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={styles.contentContainer}>
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <Icon
           name="chevron-back-outline"
@@ -61,6 +113,26 @@ const Profile = () => {
       <Text style={styles.description}>
         Tell us a bit about yourself to personalize your experience
       </Text>
+      <TouchableOpacity
+        style={styles.imagePickerContainer}
+        onPress={handleImagePicker}>
+        {profileImage ? (
+          <Image
+            source={{ uri: profileImage }}
+            style={styles.imagePickerImage}
+            containerStyle={styles.imagePickerContainer}
+          />
+        ) : (
+          <Text style={styles.imagePlaceholderText}>SJ</Text>
+        )}
+        <Icon
+          name="camera-outline"
+          size={18}
+          color={COLORS.primary}
+          style={styles.imagePickerIcon}
+        />
+      </TouchableOpacity>
+      <Text style={styles.imagePickerText}>Upload Profile Image</Text>
       {PROFILE_FORM_FIELDS.map(_field => (
         <Controller
           key={_field.name}
@@ -150,6 +222,48 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   backIcon: {
     marginLeft: moderateScale(-8),
+  },
+  imagePickerContainer: {
+    width: 110,
+    height: 110,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+    borderRadius: moderateScale(100),
+    backgroundColor: `${theme.colors.primary}40`,
+    alignSelf: 'center',
+    position: 'relative',
+  },
+  imagePickerImageContainer: {
+    zIndex: 1,
+  },
+  imagePickerImage: {
+    width: '100%',
+    height: '100%',
+  },
+  imagePlaceholderText: {
+    fontSize: moderateScale(30),
+    fontWeight: '600',
+    color: theme.colors.primary,
+  },
+  imagePickerIcon: {
+    position: 'absolute',
+    bottom: moderateScale(4),
+    right: moderateScale(4),
+    backgroundColor: theme.colors.white,
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+    borderRadius: moderateScale(100),
+    padding: moderateScale(4),
+  },
+  imagePickerText: {
+    fontSize: moderateScale(16),
+    fontWeight: '400',
+    color: theme.colors.primary,
+    marginTop: verticalScale(10),
+    textAlign: 'center',
+    marginBottom: verticalScale(20),
   },
   buttonContainer: {
     marginTop: verticalScale(10),
