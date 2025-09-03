@@ -22,7 +22,7 @@ import Dropdown from '@/components/Dropdown';
 import Input from '@/components/Input';
 import { COLORS } from '@/constants/colors';
 import { PROFILE_FORM_FIELDS } from '@/constants/onboarding';
-import { AuthStackNavigatorParamList } from '@/types/routes';
+import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 import { profileValidationSchema } from '@/utils/validationSchema';
 
 type TProfileForm = Yup.InferType<typeof profileValidationSchema>;
@@ -107,7 +107,11 @@ const Profile = () => {
           style={styles.backIcon}
           onPress={() => navigation.goBack()}
         />
-        <Text style={styles.step}>Step 1</Text>
+        <Text
+          style={styles.step}
+          onPress={() => navigation.navigate(AUTH_ROUTES.PRIVACY)}>
+          Step 1
+        </Text>
       </View>
       <Text style={styles.title}>Set up your profile</Text>
       <Text style={styles.description}>

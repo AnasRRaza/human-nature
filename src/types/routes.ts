@@ -9,6 +9,7 @@ export enum AUTH_ROUTES {
   FORGOT_PASSWORD = 'forgot_password',
   RESET_PASSWORD = 'reset_password',
   PROFILE = 'profile',
+  PRIVACY = 'privacy',
 }
 
 export enum APP_ROUTES {
@@ -37,6 +38,7 @@ export type AuthStackNavigatorParamList = {
   [AUTH_ROUTES.FORGOT_PASSWORD]: undefined;
   [AUTH_ROUTES.RESET_PASSWORD]: undefined;
   [AUTH_ROUTES.PROFILE]: undefined;
+  [AUTH_ROUTES.PRIVACY]: undefined;
 };
 
 export type AppStackNavigatorParamList = {

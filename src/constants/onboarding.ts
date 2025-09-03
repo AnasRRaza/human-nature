@@ -110,3 +110,44 @@ export const PROFILE_FORM_FIELDS = [
     data: LANGUAGES,
   },
 ];
+
+export const INTERESTS = [
+  {
+    label: 'Love',
+    value: 'Love',
+  },
+  {
+    label: 'Grief',
+    value: 'Grief',
+  },
+  {
+    label: 'Belief',
+    value: 'Belief',
+  },
+  {
+    label: 'Joy',
+    value: 'Joy',
+  },
+  {
+    label: 'Struggle',
+    value: 'Struggle',
+  },
+];
+
+export const PRIVACY_SETTINGS = [
+  {
+    label: 'Public',
+    value: 'Public',
+    description: 'Everyone can see your profile',
+  },
+  {
+    label: 'Private',
+    value: 'Private',
+    description: 'Only you can see your profile',
+  },
+  {
+    label: 'Friends Only',
+    value: 'Friends',
+    description: 'Only friends can see your profile',
+  },
+];
