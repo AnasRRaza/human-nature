@@ -10,6 +10,7 @@ import { makeStyles, Text } from '@rneui/themed';
 import * as Yup from 'yup';
 
 import Button from '@/components/Button';
+import Dropdown from '@/components/Dropdown';
 import Input from '@/components/Input';
 import { COLORS } from '@/constants/colors';
 import { PROFILE_FORM_FIELDS } from '@/constants/onboarding';
@@ -43,7 +44,9 @@ const Profile = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
       <View style={styles.header}>
         <Icon
           name="chevron-back-outline"
@@ -63,20 +66,44 @@ const Profile = () => {
           key={_field.name}
           control={control}
           name={_field.name as keyof TProfileForm}
-          render={({ field }) => (
-            <Input
-              key={field.name}
-              label={_field.label}
-              placeholder={_field.placeholder}
-              onChangeText={field.onChange}
-              errorMessage={errors?.[field.name]?.message}
-              autoCapitalize="none"
-              leftIcon={
-                <Icon name={_field.leftIcon} size={22} color={COLORS.primary} />
-              }
-              {...field}
-            />
-          )}
+          render={({ field }) => {
+            return _field.isDropdown ? (
+              <Dropdown
+                data={_field.data}
+                label={_field.label}
+                placeholder={_field.placeholder}
+                labelField="label"
+                valueField="value"
+                renderLeftIcon={() => (
+                  <Icon
+                    name={_field.leftIcon}
+                    size={22}
+                    color={COLORS.primary}
+                    style={styles.leftIcon}
+                  />
+                )}
+                errorMessage={errors?.[field.name]?.message}
+                {...field}
+              />
+            ) : (
+              <Input
+                key={field.name}
+                label={_field.label}
+                placeholder={_field.placeholder}
+                onChangeText={field.onChange}
+                errorMessage={errors?.[field.name]?.message}
+                autoCapitalize="none"
+                leftIcon={
+                  <Icon
+                    name={_field.leftIcon}
+                    size={22}
+                    color={COLORS.primary}
+                  />
+                }
+                {...field}
+              />
+            );
+          }}
         />
       ))}
       <View style={styles.buttonContainer}>
@@ -94,6 +121,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.colors.background,
     paddingHorizontal: theme.spacing.lg,
     paddingTop: verticalScale(10),
+  },
+  contentContainer: {
+    paddingBottom: verticalScale(40),
   },
   header: {
     flexDirection: 'row',
@@ -122,6 +152,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: moderateScale(-8),
   },
   buttonContainer: {
-    marginTop: verticalScale(24),
+    marginTop: verticalScale(10),
+  },
+  leftIcon: {
+    marginRight: moderateScale(10),
   },
 }));

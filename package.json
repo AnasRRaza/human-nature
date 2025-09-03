@@ -32,6 +32,7 @@
     "react-hook-form": "^7.56.3",
     "react-i18next": "^15.5.1",
     "react-native": "0.79.2",
+    "react-native-element-dropdown": "^2.12.4",
     "react-native-gesture-handler": "^2.26.0",
     "react-native-localize": "^3.4.1",
     "react-native-otp-entry": "^1.8.5",
