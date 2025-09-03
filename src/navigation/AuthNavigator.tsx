@@ -8,6 +8,7 @@ import OTP from '@/screens/Auth/OTP';
 import ResetPassword from '@/screens/Auth/ResetPassword';
 import SignIn from '@/screens/Auth/SignIn';
 import Start from '@/screens/Auth/Start';
+import Profile from '@/screens/Onboarding/Profile';
 import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 
 const Stack = createStackNavigator<AuthStackNavigatorParamList>();
@@ -31,6 +32,7 @@ const AuthNavigator = () => {
           name={AUTH_ROUTES.RESET_PASSWORD}
           component={ResetPassword}
         />
+        <Stack.Screen name={AUTH_ROUTES.PROFILE} component={Profile} />
       </Stack.Navigator>
     </SafeAreaView>
   );

@@ -54,3 +54,10 @@ export const resetPasswordValidationSchema = Yup.object({
     .required('Confirm password is required')
     .matches(/^\S*$/, 'No white spaces are allowed'),
 });
+
+export const profileValidationSchema = Yup.object({
+  fullName: Yup.string().required('Full name is required'),
+  age: Yup.string().required('Age is required'),
+  country: Yup.string().required('Country is required'),
+  language: Yup.string().required('Language is required'),
+});

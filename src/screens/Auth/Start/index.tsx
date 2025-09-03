@@ -17,7 +17,7 @@ const Start = () => {
   const handleSignIn = () => navigation.navigate(AUTH_ROUTES.SIGNIN);
 
   const handleContinueAnonymously = () =>
-    navigation.navigate(AUTH_ROUTES.SIGNUP);
+    navigation.navigate(AUTH_ROUTES.PROFILE);
 
   return (
     <ScrollView
@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     flex: 1,
     paddingHorizontal: theme.spacing.lg,
+    backgroundColor: theme.colors.background,
   },
   contentContainer: {
     flex: 1,
