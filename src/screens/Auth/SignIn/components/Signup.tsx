@@ -13,6 +13,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { SIGNUP_FORM_FIELDS } from '@/constants/auth';
 import { COLORS } from '@/constants/colors';
+import { useSignup } from '@/hooks/useSignup';
 import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 import { signupValidationSchema } from '@/utils/validationSchema';
 
@@ -36,11 +37,17 @@ const Signup = () => {
   const styles = useStyles();
   const navigation =
     useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
+  const { mutate: signup, isPending } = useSignup();
 
   const onSubmit: SubmitHandler<TSignupForm> = data => {
-    console.log(data);
-    // TODO: Signup API call
-    navigation.navigate(AUTH_ROUTES.OTP);
+    signup(data, {
+      onSuccess: () => {
+        navigation.navigate(AUTH_ROUTES.OTP);
+      },
+      onError: () => {
+        console.log('error');
+      },
+    });
   };
 
   const handleContinueAnonymously = () =>
@@ -71,7 +78,11 @@ const Signup = () => {
         />
       ))}
       <View style={styles.buttonContainer}>
-        <Button title="Signup" onPress={handleSubmit(onSubmit)} />
+        <Button
+          title="Signup"
+          onPress={handleSubmit(onSubmit)}
+          loading={isPending}
+        />
         <Text style={styles.orText}>Or continue with</Text>
         <Button
           type="outline"

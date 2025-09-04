@@ -13,6 +13,8 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { SIGNIN_FORM_FIELDS } from '@/constants/auth';
 import { COLORS } from '@/constants/colors';
+import { useLogin } from '@/hooks/useLogin';
+import { useToastNotification } from '@/hooks/useToast';
 import {
   APP_ROUTES,
   AUTH_ROUTES,
@@ -25,8 +27,6 @@ import { loginValidationSchema } from '@/utils/validationSchema';
 type TLoginForm = Yup.InferType<typeof loginValidationSchema>;
 
 const Login = () => {
-  const styles = useStyles();
-
   const {
     control,
     handleSubmit,
@@ -40,16 +40,24 @@ const Login = () => {
     },
   });
 
+  const styles = useStyles();
   const navigation =
     useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
-
   const navigationStack = useNavigation<StacksNavigationProp>();
+  const { mutate: login, isPending } = useLogin();
+  const toast = useToastNotification();
 
   const onSubmit: SubmitHandler<TLoginForm> = data => {
-    console.log(data);
-    // TODO: Login API call
-    navigationStack.navigate(STACKS.APP, {
-      screen: APP_ROUTES.HOME,
+    login(data, {
+      onSuccess: () => {
+        toast('Login successful!', 'success');
+        navigationStack.navigate(STACKS.APP, {
+          screen: APP_ROUTES.HOME,
+        });
+      },
+      onError: () => {
+        toast('Invalid email or password', 'error');
+      },
     });
   };
 
@@ -89,7 +97,11 @@ const Login = () => {
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Sign In" onPress={handleSubmit(onSubmit)} />
+        <Button
+          title="Sign In"
+          onPress={handleSubmit(onSubmit)}
+          loading={isPending}
+        />
         <Text style={styles.orText}>Or continue with</Text>
         <Button
           type="outline"

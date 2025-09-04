@@ -1,9 +1,10 @@
 import axios from 'axios';
 
+import { CONFIG } from '@/constants/config';
 import { useAuthStore } from '@/store/auth';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://your-api-url.com',
+  baseURL: CONFIG.API_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
