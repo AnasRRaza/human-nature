@@ -3,21 +3,35 @@ import { Pressable } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { Button as RNEButton, ButtonProps, makeStyles } from '@rneui/themed';
 
-interface Props extends ButtonProps {}
+interface Props extends ButtonProps {
+  isShadow?: boolean;
+}
 
-const Button: React.FC<Props> = ({ ...props }) => {
+const Button: React.FC<Props> = ({ isShadow = false, ...props }) => {
   const styles = useStyles(props.type);
 
+  if (isShadow) {
+    return (
+      <Pressable style={styles.container}>
+        <RNEButton
+          {...props}
+          buttonStyle={[styles.button, props.buttonStyle]}
+          titleStyle={[styles.buttonTitle, props.titleStyle]}
+          disabledStyle={styles.disabledButton}
+          disabledTitleStyle={styles.disabledButtonTitle}
+        />
+      </Pressable>
+    );
+  }
+
   return (
-    <Pressable style={styles.container}>
-      <RNEButton
-        {...props}
-        buttonStyle={[styles.button, props.buttonStyle]}
-        titleStyle={[styles.buttonTitle, props.titleStyle]}
-        disabledStyle={styles.disabledButton}
-        disabledTitleStyle={styles.disabledButtonTitle}
-      />
-    </Pressable>
+    <RNEButton
+      {...props}
+      buttonStyle={[styles.button, props.buttonStyle]}
+      titleStyle={[styles.buttonTitle, props.titleStyle]}
+      disabledStyle={styles.disabledButton}
+      disabledTitleStyle={styles.disabledButtonTitle}
+    />
   );
 };
 

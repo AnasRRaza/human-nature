@@ -68,6 +68,7 @@ const ForgotPassword = () => {
       <View style={styles.buttonContainer}>
         <Button
           title="Get Verification Code"
+          isShadow
           onPress={handleSubmit(onSubmit)}
         />
       </View>

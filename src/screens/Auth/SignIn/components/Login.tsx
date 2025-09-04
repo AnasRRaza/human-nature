@@ -99,6 +99,7 @@ const Login = () => {
       <View style={styles.buttonContainer}>
         <Button
           title="Sign In"
+          isShadow
           onPress={handleSubmit(onSubmit)}
           loading={isPending}
         />

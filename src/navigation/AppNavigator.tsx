@@ -1,44 +1,34 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 import { makeStyles } from '@rneui/themed';
 
 import Header from '@/components/Header';
-import BottomTabNavigator from '@/navigation/BottomTabNavigator';
-import Profile from '@/screens/Profile';
+import Home from '@/screens/Home';
 import { APP_ROUTES, AppStackNavigatorParamList } from '@/types/routes';
 
-const Drawer = createDrawerNavigator<AppStackNavigatorParamList>();
+const Stack = createStackNavigator<AppStackNavigatorParamList>();
 
 const AppNavigator = () => {
   const styles = useStyles();
 
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
-      <Drawer.Navigator
+      <Stack.Navigator
         screenOptions={{
           header: props => (
             <Header title={props?.options?.title || ''} isBack />
           ),
-          drawerType: 'front',
         }}>
-        <Drawer.Screen
+        <Stack.Screen
           options={{
             headerShown: false,
-            title: 'Dashboard',
           }}
           name={APP_ROUTES.HOME}
-          component={BottomTabNavigator}
+          component={Home}
         />
-        <Drawer.Screen
-          options={{
-            title: 'Profile',
-          }}
-          name={APP_ROUTES.PROFILE}
-          component={Profile}
-        />
-      </Drawer.Navigator>
+      </Stack.Navigator>
     </SafeAreaView>
   );
 };

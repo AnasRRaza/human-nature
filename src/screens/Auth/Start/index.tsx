@@ -31,7 +31,7 @@ const Start = () => {
         Connect with your authentic self and nurture meaningful relationships
       </Text>
       <View style={styles.buttonContainer}>
-        <Button title="Sign In" onPress={handleSignIn} />
+        <Button title="Sign In" isShadow onPress={handleSignIn} />
         <Button
           type="outline"
           title="Continue Anonymously"

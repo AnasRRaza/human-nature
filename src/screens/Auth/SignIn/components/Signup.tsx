@@ -80,6 +80,7 @@ const Signup = () => {
       <View style={styles.buttonContainer}>
         <Button
           title="Signup"
+          isShadow
           onPress={handleSubmit(onSubmit)}
           loading={isPending}
         />

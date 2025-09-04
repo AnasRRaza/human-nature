@@ -54,7 +54,12 @@ const OTP = () => {
         }}
       />
       <View style={styles.buttonContainer}>
-        <Button disabled={otp.length !== 6} title="Verify" onPress={onSubmit} />
+        <Button
+          disabled={otp.length !== 6}
+          title="Verify"
+          isShadow
+          onPress={onSubmit}
+        />
       </View>
     </View>
   );

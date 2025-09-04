@@ -64,7 +64,7 @@ const ResetPassword = () => {
         />
       ))}
       <View style={styles.buttonContainer}>
-        <Button title="Confirm" onPress={handleSubmit(onSubmit)} />
+        <Button title="Confirm" isShadow onPress={handleSubmit(onSubmit)} />
       </View>
     </View>
   );
