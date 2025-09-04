@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Theme } from '@rneui/base';
 import { makeStyles, Text } from '@rneui/themed';
 import * as Yup from 'yup';
@@ -12,12 +13,12 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { SIGNUP_FORM_FIELDS } from '@/constants/auth';
 import { COLORS } from '@/constants/colors';
+import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 import { signupValidationSchema } from '@/utils/validationSchema';
 
 type TSignupForm = Yup.InferType<typeof signupValidationSchema>;
 
 const Signup = () => {
-  const styles = useStyles();
   const {
     control,
     handleSubmit,
@@ -32,10 +33,18 @@ const Signup = () => {
     },
   });
 
+  const styles = useStyles();
+  const navigation =
+    useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
+
   const onSubmit: SubmitHandler<TSignupForm> = data => {
     console.log(data);
     // TODO: Signup API call
+    navigation.navigate(AUTH_ROUTES.OTP);
   };
+
+  const handleContinueAnonymously = () =>
+    navigation.navigate(AUTH_ROUTES.PROFILE);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -90,7 +99,11 @@ const Signup = () => {
             />
           }
         />
-        <Button type="outline" title="Continue Anonymously" />
+        <Button
+          type="outline"
+          title="Continue Anonymously"
+          onPress={handleContinueAnonymously}
+        />
       </View>
       <View style={styles.privacyPolicyContainer}>
         <Text style={styles.privacyPolicy}>

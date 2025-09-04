@@ -13,7 +13,13 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { SIGNIN_FORM_FIELDS } from '@/constants/auth';
 import { COLORS } from '@/constants/colors';
-import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
+import {
+  APP_ROUTES,
+  AUTH_ROUTES,
+  AuthStackNavigatorParamList,
+  STACKS,
+  StacksNavigationProp,
+} from '@/types/routes';
 import { loginValidationSchema } from '@/utils/validationSchema';
 
 type TLoginForm = Yup.InferType<typeof loginValidationSchema>;
@@ -37,13 +43,21 @@ const Login = () => {
   const navigation =
     useNavigation<NavigationProp<AuthStackNavigatorParamList>>();
 
+  const navigationStack = useNavigation<StacksNavigationProp>();
+
   const onSubmit: SubmitHandler<TLoginForm> = data => {
     console.log(data);
     // TODO: Login API call
+    navigationStack.navigate(STACKS.APP, {
+      screen: APP_ROUTES.HOME,
+    });
   };
 
   const handleForgotPassword = () =>
     navigation.navigate(AUTH_ROUTES.FORGOT_PASSWORD);
+
+  const handleContinueAnonymously = () =>
+    navigation.navigate(AUTH_ROUTES.PROFILE);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -103,7 +117,11 @@ const Login = () => {
             />
           }
         />
-        <Button type="outline" title="Continue Anonymously" />
+        <Button
+          type="outline"
+          title="Continue Anonymously"
+          onPress={handleContinueAnonymously}
+        />
       </View>
       <View style={styles.privacyPolicyContainer}>
         <Text style={styles.privacyPolicy}>

@@ -50,6 +50,7 @@ const Profile = () => {
   const onSubmit: SubmitHandler<TProfileForm> = data => {
     console.log(data);
     // TODO: Profile API call
+    navigation.navigate(AUTH_ROUTES.PRIVACY);
   };
 
   const requestGalleryPermission = async () => {

@@ -9,7 +9,7 @@ import { makeStyles, Text } from '@rneui/themed';
 
 import Button from '@/components/Button';
 import { COLORS } from '@/constants/colors';
-import { AuthStackNavigatorParamList } from '@/types/routes';
+import { AUTH_ROUTES, AuthStackNavigatorParamList } from '@/types/routes';
 
 const OTP = () => {
   const [otp, setOtp] = useState('');
@@ -20,6 +20,7 @@ const OTP = () => {
 
   const onSubmit = () => {
     console.log(otp);
+    navigation.navigate(AUTH_ROUTES.PROFILE);
     // TODO: Forgot Password API call
   };
 
